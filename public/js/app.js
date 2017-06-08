@@ -20,7 +20,7 @@ const TodoApp = {
   },
   render: function(){
     const lis = this.todos
-                    .map(todo => '<li>' + todo.task + '</li>')
+                    .map(todo => `<li>${todo.task}</li>`)
                     .join();
     this.todoList.innerHTML = lis;
   }
