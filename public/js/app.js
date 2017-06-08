@@ -2,7 +2,7 @@
 
 const TodoApp = {
   rootElement: '#app',
-  todos: [{task: 'get some milk', isComplete: false}],
+  todos: [],
   start: function(){
     this.cacheDOM();
     this.bindEvents();
@@ -15,13 +15,31 @@ const TodoApp = {
     this.todoList = this.root.querySelector('.todo-list');
   },
   bindEvents: function(){
-    this.addButton.addEventListener('click', () => console.log('add'));
-
+    this.addButton.addEventListener('click', () => this.addTodo());
+  },
+  addTodo: function(){
+    // grab task input
+    const taskValue = this.taskInput.value;
+    //validate taskValue is something
+    if(!taskValue) {
+        return;
+    }
+    //build todo object with value
+    const todo= {
+      task: taskValue,
+      isComplete: false
+    };
+    //add todo to the todos array
+    this.todos.push(todo);
+    //rerender
+    this.render();
+    //clear input
+    this.taskInput.value = '';
   },
   render: function(){
     const lis = this.todos
                     .map(todo => `<li>${todo.task}</li>`)
-                    .join();
+                    .join('');
     this.todoList.innerHTML = lis;
   }
 };
