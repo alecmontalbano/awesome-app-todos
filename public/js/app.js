@@ -10,14 +10,17 @@ const TodoApp = {
   },
   cacheDOM: function(){
     this.root = document.querySelector(this.rootElement);
-    this.addButton = this.root.querySelector('.add-button');
+    //this.addButton = this.root.querySelector('.add-button');
+    this.createForm = this.root.querySelector('.create-form');
     this.taskInput = this.root.querySelector('.task-input');
     this.todoList = this.root.querySelector('.todo-list');
   },
   bindEvents: function(){
-    this.addButton.addEventListener('click', () => this.addTodo());
+    //this.addButton.addEventListener('click', () => this.addTodo());
+    this.createForm.addEventListener('submit', (event) => this.addTodo(event));
   },
-  addTodo: function(){
+  addTodo: function(event){
+    event.preventDefault();
     // grab task input
     const taskValue = this.taskInput.value;
     //validate taskValue is something
@@ -25,7 +28,7 @@ const TodoApp = {
         return;
     }
     //build todo object with value
-    const todo= {
+    const todo = {
       task: taskValue,
       isComplete: false
     };
